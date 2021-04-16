@@ -18,61 +18,55 @@ public class PostCreatePutUpdate  {
     public PostCreatePutUpdate() throws FileNotFoundException {
     }
 
-    public String createNewUser() throws Exception {
-
-        String newUser = "{\n" +
-                "    \"name\": \"morpheus\",\n" +
-                "    \"job\": \"leader\"\n" +
-                "}";
+    public NewUser createNewUser(NewUser newUser) throws Exception {
 
         prop.load(fis);
+        String url = prop.getProperty("users");
+
 
         return RestAssured
-                .given().log().all().contentType(ContentType.JSON).body(newUser)
+                .given()
+                .log().all()
+                .contentType(ContentType.JSON)
+                .body(newUser)
                 .when()
-                .post(prop.getProperty("users"))
+                .post(url)
                 .then().statusCode(201)
-                .extract().asString();
+                .extract()
+                .as(NewUser.class);
     }
 
-    public String updateName(int userId) throws IOException {
-
-        String updatedUser = "{\n" +
-                "    \"name\": \"morpheus\",\n" +
-                "    \"job\": \"zion resident\"\n" +
-                "}";
+    public UpdatedUser updateName(UpdatedUser updatedUser) throws IOException {
 
         prop.load(fis);
+        String url = prop.getProperty("users");
+        int userId = 10;
 
         return RestAssured
                 .given()
                 .log().all().contentType(ContentType.JSON).body(updatedUser)
                 .when()
-                .put(prop.getProperty("users") + userId)
+                .put(url + userId)
                 .then()
                 .statusCode(200)
                 .extract()
-                .asString();
+                .as(UpdatedUser.class);
     }
 
-    public String postRegister () throws IOException {
-
-        String registerUser = "{\n" +
-                "    \"email\": \"eve.holt@reqres.in\",\n" +
-                "    \"password\": \"pistol\"\n" +
-                "}";
+    public RegisterUser postRegister (RegisterUser registerUser) throws IOException {
 
         prop.load(fis);
+        String url = prop.getProperty("register");
 
         return RestAssured
                 .given()
                 .log().all().contentType(ContentType.JSON).body(registerUser)
                 .when()
-                .post(prop.getProperty("register"))
+                .post(url)
                 .then()
                 .statusCode(200)
                 .extract()
-                .asString();
+                .as(RegisterUser.class);
 }
     }
 
