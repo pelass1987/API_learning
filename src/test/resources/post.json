@@ -1,0 +1,12 @@
+{
+  "cmId": 62100,
+  "currentPage": 0,
+  "action": "submit",
+  "questions": [
+    {
+      "id": 5504,
+      "questionType": "textfield",
+      "answer": "testanswer"
+    }
+  ]
+}

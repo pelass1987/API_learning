@@ -2,10 +2,13 @@ package reqresAPI;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import org.hamcrest.Matchers;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.regex.Matcher;
 
 public class PostCreatePutUpdate  {
 
@@ -31,7 +34,7 @@ public class PostCreatePutUpdate  {
                 .body(newUser)
                 .when()
                 .post(url)
-                .then().statusCode(201)
+                .then().statusCode(Matchers.greaterThanOrEqualTo(200))
                 .extract()
                 .as(NewUser.class);
     }
@@ -67,6 +70,8 @@ public class PostCreatePutUpdate  {
                 .statusCode(200)
                 .extract()
                 .as(RegisterUser.class);
+
+
 }
     }
 

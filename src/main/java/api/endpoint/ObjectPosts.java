@@ -57,5 +57,7 @@ public class ObjectPosts {
     public void setBody(String body) {
         this.body = body;
     }
+
+
 }
 
